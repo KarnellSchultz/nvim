@@ -24,7 +24,7 @@ What is Kickstart?
 
   Kickstart.nvim is *not* a distribution.
 
-  Kickstart.nvim is a starting point for your own configuration.
+  Kcnextickstart.nvim is a starting point for your own configuration.
     The goal is that you can read every line of code, top-to-bottom, understand
     what your configuration is doing, and modify it to suit your needs.
 
@@ -404,7 +404,20 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        defaults = {
+          layout_config = {
+            horizontal = {
+              mirror = false,
+              width = 0.9, -- Width of the picker window (0.0 to 1.0)
+              height = 0.9, -- Height of the picker window (0.0 to 1.0)
+            },
+          },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -430,6 +443,10 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>st', builtin.colorscheme, { desc = '[S]earch [T]heme' })
 
+      -- Remap 'jk' to Escape
+      vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+      vim.keymap.set('i', 'kj', '<Esc>', { noremap = true, silent = true })
+
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
@@ -450,7 +467,14 @@ require('lazy').setup({
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
+        builtin.find_files {
+          cwd = vim.fn.stdpath 'config',
+        }
+      end, { desc = '[S]earch [N]eovim files' })
+      vim.keymap.set('n', '<leader>sn', function()
+        builtin.find_files {
+          cwd = vim.fn.stdpath 'config',
+        }
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
@@ -871,27 +895,39 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
+  {
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    -- 'folke/tokyonight.nvim',
-    'catppuccin/nvim',
-    -- 'Mofiqul/dracula.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    {
+      'folke/tokyonight.nvim',
+      name = 'tokyonight-storm', -- Change to your preferred theme
+    },
+    {
+      'Mofiqul/dracula.nvim',
+      name = 'dracula',
+    },
+    {
+      'projekt0n/github-nvim-theme',
+      name = 'github-theme',
+    },
+    {
+      'catppuccin/nvim',
+      name = 'catppuccin',
+      -- config = function()
+      --   vim.cmd.colorscheme 'catppuccin-latte'
+      -- end,
+    },
     config = function()
+      vim.cmd.colorscheme 'catpuccin-latte'
       ---@diagnostic disable-next-line: missing-fields
       -- require('catppuccin').setup {
       --   styles = {
       --     comments = { italic = false }, -- Disable italics in comments
       --   },
       -- }
-
       -- Load the colorscheme here.
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      -- vim.cmd.colorscheme 'catpuccin-latte'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -978,13 +1014,13 @@ require('lazy').setup({
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
