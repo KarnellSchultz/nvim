@@ -894,46 +894,93 @@ require('lazy').setup({
       signature = { enabled = true },
     },
   },
-
   {
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    -- Gruvbox
     {
-      'folke/tokyonight.nvim',
-      name = 'tokyonight-storm', -- Change to your preferred theme
+      'ellisonleao/gruvbox.nvim',
+      name = 'gruvbox',
+      -- config = function()
+      --   vim.cmd.colorscheme 'gruvbox'
+      -- end,
     },
+
+    -- Rose Pine
     {
-      'Mofiqul/dracula.nvim',
-      name = 'dracula',
+      'rose-pine/neovim',
+      name = 'rose-pine',
+      -- config = function()
+      --   vim.cmd.colorscheme 'rose-pine'
+      -- end,
     },
-    {
-      'projekt0n/github-nvim-theme',
-      name = 'github-theme',
-    },
+
+    -- Catppuccin
     {
       'catppuccin/nvim',
       name = 'catppuccin',
       -- config = function()
-      --   vim.cmd.colorscheme 'catppuccin-latte'
+      --   vim.cmd.colorscheme 'catppuccin-mocha'
       -- end,
     },
-    config = function()
-      vim.cmd.colorscheme 'catpuccin-latte'
-      ---@diagnostic disable-next-line: missing-fields
-      -- require('catppuccin').setup {
-      --   styles = {
-      --     comments = { italic = false }, -- Disable italics in comments
-      --   },
-      -- }
-      -- Load the colorscheme here.
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-      -- vim.cmd.colorscheme 'catpuccin-latte'
 
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
-    end,
+    -- Tokyo Night
+    {
+      'folke/tokyonight.nvim',
+      name = 'tokyonight',
+      -- config = function()
+      --   vim.cmd.colorscheme 'tokyonight'
+      -- end,
+    },
+
+    -- Dracula
+    {
+      'Mofiqul/dracula.nvim',
+      name = 'dracula',
+      -- config = function()
+      --   vim.cmd.colorscheme 'dracula'
+      -- end,
+    },
+
+    -- Nord
+    {
+      'shaunsingh/nord.nvim',
+      name = 'nord',
+      -- config = function()
+      --   vim.cmd.colorscheme 'nord'
+      -- end,
+    },
+
+    -- Nightfox
+    {
+      'EdenEast/nightfox.nvim',
+      name = 'nightfox',
+      -- config = function()
+      --   vim.cmd.colorscheme 'nightfox'
+      -- end,
+    },
+
+    -- GitHub Theme
+    {
+      'projekt0n/github-nvim-theme',
+      name = 'github-theme',
+      config = function()
+        -- Some variants are available (e.g. github_dark, github_light)
+        vim.cmd.colorscheme 'github_dark'
+      end,
+    },
+
+    -- One Dark Pro
+    {
+      'navarasu/onedark.nvim',
+      name = 'onedark',
+      -- config = function()
+      --   require('onedark').setup {
+      --     style = 'dark', -- You can choose: "dark", "darker", "cool", "deep", "warm", "warmer"
+      --   }
+      --   require('onedark').load()
+      -- end,
+    },
   },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
