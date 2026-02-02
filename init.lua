@@ -710,10 +710,10 @@ require('lazy').setup({
       -- set use_icons to true if you have a Nerd Font
       statusline.setup { use_icons = vim.g.have_nerd_font }
 
-      -- Show only filename, not relative path
+      -- Show relative filepath, not just filename
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_filename = function()
-        return '%t' -- %t shows only the filename, not the path
+        return '%f' -- %f shows the relative filepath
       end
 
       -- You can configure sections in the statusline by overriding their

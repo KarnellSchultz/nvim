@@ -88,11 +88,38 @@ return {
     'metalelf0/black-metal-theme-neovim',
     lazy = false,
     priority = 1000,
+    -- config = function()
+    --   require('black-metal').setup {
+    --     theme = 'gorgoroth',
+    --   }
+    --   require('black-metal').load()
+    -- end,
+  },
+  {
+    'ydkulks/cursor-dark.nvim',
+    lazy = false,
+    priority = 1000,
     config = function()
-      require('black-metal').setup {
-        theme = 'gorgoroth',
+      -- vim.cmd.colorscheme("cursor-dark-midnight")
+      require('cursor-dark').setup {
+        -- For theme
+        style = 'dark-midnight',
+        -- For a transparent background
+        transparent = true,
+        -- If you have dashboard-nvim plugin installed
+        dashboard = true,
       }
-      require('black-metal').load()
     end,
+  },
+  {
+    'jwbaldwin/oscura.nvim',
+    lazy = false,
+    priority = 1000,
+    -- config = function()
+    --   require('oscura').setup {
+    --     theme = 'oscura',
+    --   }
+    --   require('oscura').load()
+    -- end,
   },
 }
