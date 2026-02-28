@@ -527,6 +527,14 @@ require('lazy').setup({
         html = {},
       }
 
+      -- Map LSP server names to their corresponding Mason package names
+      local lsp_to_mason = {
+        ts_ls = 'typescript-language-server',
+        eslint = 'eslint-lsp',
+        html = 'html-lsp',
+        -- gopls, cspell work as-is
+      }
+
       -- Ensure the servers and tools above are installed
       --
       -- To check the current status of installed tools and/or manually install
@@ -534,10 +542,13 @@ require('lazy').setup({
       --    :Mason
       --
       -- You can press `g?` for help in this menu.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = vim.tbl_map(function(server_name)
+        return lsp_to_mason[server_name] or server_name
+      end, vim.tbl_keys(servers or {}))
       vim.list_extend(ensure_installed, {
-        'lua_ls', -- Lua Language server
+        'lua-language-server', -- Lua Language server
         'stylua', -- Used to format Lua code
+        'biome', -- Modern JS/TS/JSON/CSS formatter & linter (replaces prettier/eslint)
         -- You can add other tools here that you want Mason to install
       })
 
@@ -608,11 +619,16 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        -- Biome: Modern JS/TS/JSON/CSS formatter & linter (format + lint + organize imports)
+        javascript = { 'biome-check' },
+        javascriptreact = { 'biome-check' },
+        typescript = { 'biome-check' },
+        typescriptreact = { 'biome-check' },
+        json = { 'biome-check' },
+        jsonc = { 'biome-check' },
+        css = { 'biome-check' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
   },
@@ -712,6 +728,9 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
+  -- Smart commenting (gcc to comment line, gc in visual mode)
+  { 'numToStr/Comment.nvim', opts = {}, event = 'VeryLazy' },
+
   { -- Collection of various small independent plugins/modules
     'nvim-mini/mini.nvim',
     config = function()
@@ -787,9 +806,9 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line', -- ✅ ENABLED: Visual indent guides
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs', -- ✅ ENABLED: Auto-close brackets/quotes
   -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 

@@ -5,8 +5,8 @@ return {
   vim.keymap.set('i', 'jk', '<Esc>', { desc = 'go to normal mode' }),
   vim.keymap.set('i', 'kj', '<Esc>', { desc = 'go to normal mode' }),
   vim.keymap.set('n', '<leader>cp', function()
-    local filepath = vim.fn.expand '%:p'
+    local filepath = vim.fn.expand '%:h'
     vim.fn.setreg('+', filepath)
-    print('✨copied✨:' .. filepath)
+    vim.notify(filepath .. ' copied to clipboard', 'info')
   end, { noremap = true, desc = 'Copy file path' }),
 }
