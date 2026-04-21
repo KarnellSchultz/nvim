@@ -1,61 +1,3 @@
---[[
-  ═══════════════════════════════════════════════════════════════════════════
-  NEOVIM COLORSCHEME CONFIGURATION
-  ═══════════════════════════════════════════════════════════════════════════
-  
-  Current Active Theme: OSCURA
-  
-  ─────────────────────────────────────────────────────────────────────────────
-  HOW TO SWITCH THEMES
-  ─────────────────────────────────────────────────────────────────────────────
-  
-  Method 1 (Recommended): Interactive Telescope Picker
-    • Press: <leader>st (or :Telescope colorscheme)
-    • Preview themes in real-time
-    • Press <Enter> to apply
-    • Note: Changes are temporary (reverts on restart)
-  
-  Method 2: Set Default Theme
-    • Find the theme you want below
-    • Uncomment its config function
-    • Comment out the current active theme's config
-    • Ensure it has: lazy = false, priority = 1000
-    • Save and restart Neovim
-  
-  ─────────────────────────────────────────────────────────────────────────────
-  AVAILABLE THEMES & VARIANTS
-  ─────────────────────────────────────────────────────────────────────────────
-  
-  DARK THEMES:
-  • Gruvbox          → gruvbox (also has light variant)
-  • Rose Pine        → rose-pine, rose-pine-main, rose-pine-moon, rose-pine-dawn
-  • Catppuccin       → catppuccin-mocha, catppuccin-latte, catppuccin-frappe, catppuccin-macchiato
-  • Tokyo Night      → tokyonight, tokyonight-night, tokyonight-storm, tokyonight-day, tokyonight-moon
-  • Dracula          → dracula, dracula-soft
-  • Nord             → nord
-  • Nightfox         → nightfox, dawnfox, dayfox, duskfox, nordfox, terafox, carbonfox
-  • GitHub Theme     → github_dark, github_light, github_dark_default, github_light_default
-  • One Dark Pro     → onedark (styles: dark, darker, cool, deep, warm, warmer)
-  • Black Metal      → black-metal (themes: bathory, burzum, dark-funeral, gorgoroth, etc.)
-  • Cursor Dark      → cursor-dark-midnight, cursor-dark-twilight
-  • Oscura (ACTIVE)  → oscura
-  • Vesper           → vesper
-  • Kanagawa         → kanagawa, kanagawa-wave, kanagawa-dragon, kanagawa-lotus
-  
-  LIGHT THEMES:
-  • Everforest       → everforest (3 light variants: hard, medium, soft) ⭐ Excellent eye comfort
-  • Edge             → edge (light variant available) ⭐ Modern & professional
-  • Solarized Osaka  → solarized-osaka (light variant) ⭐ Modern Solarized reimplementation
-  • Gruvbox          → gruvbox (light variants: hard, medium, soft)
-  • Catppuccin       → catppuccin-latte (light variant)
-  • Rose Pine        → rose-pine-dawn (light variant)
-  • Tokyo Night      → tokyonight-day (light variant)
-  • Nightfox         → dayfox, dawnfox (light variants)
-  • GitHub Theme     → github_light, github_light_default
-  
-  ═══════════════════════════════════════════════════════════════════════════
---]]
-
 return {
   -- ═══════════════════════════════════════════════════════════════════════════
   -- GRUVBOX - Retro groove color scheme
@@ -388,7 +330,7 @@ return {
     name = 'black-metal',
     opts = {
       theme = 'gorgoroth', -- Options: 'bathory', 'burzum', 'dark-funeral', 'gorgoroth',
-                           -- 'immortal', 'khold', 'marduk', 'mayhem', 'nile', 'venom'
+      -- 'immortal', 'khold', 'marduk', 'mayhem', 'nile', 'venom'
     },
     -- config = function()
     --   require('black-metal').setup {
@@ -417,8 +359,8 @@ return {
   -- ═══════════════════════════════════════════════════════════════════════════
   {
     'jwbaldwin/oscura.nvim',
-    lazy = false,        -- Load immediately on startup
-    priority = 1000,     -- Load before other plugins
+    lazy = false, -- Load immediately on startup
+    priority = 1000, -- Load before other plugins
     opts = {
       theme = 'oscura',
     },
@@ -462,9 +404,7 @@ return {
         palette = {},
         theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
       },
-      overrides = function(colors)
-        return {}
-      end,
+      overrides = function(colors) return {} end,
       theme = 'wave', -- Options: 'wave', 'dragon', 'lotus'
       background = {
         dark = 'wave',
@@ -487,58 +427,58 @@ return {
     -- config = function()
     --   -- Background options: 'hard', 'medium' (default), 'soft'
     --   vim.g.everforest_background = 'medium'
-    --   
+    --
     --   -- Enable/disable italic for comments and keywords
     --   vim.g.everforest_enable_italic = 1
-    --   
+    --
     --   -- Disable italic for comments only
     --   vim.g.everforest_disable_italic_comment = 0
-    --   
+    --
     --   -- Control diagnostic text highlighting style
     --   vim.g.everforest_diagnostic_text_highlight = 0
-    --   
+    --
     --   -- Control diagnostic line highlighting
     --   vim.g.everforest_diagnostic_line_highlight = 0
-    --   
+    --
     --   -- Control diagnostic virtual text style (0: grey, 1: colored)
     --   vim.g.everforest_diagnostic_virtual_text = 'grey'
-    --   
+    --
     --   -- Disable terminal colors
     --   vim.g.everforest_disable_terminal_colors = 0
-    --   
+    --
     --   -- Current word highlighting (0: disabled, 1: grey bg, 2: bold)
     --   vim.g.everforest_current_word = 'grey background'
-    --   
+    --
     --   -- Transparent background (0: disabled, 1: enabled, 2: all)
     --   vim.g.everforest_transparent_background = 0
-    --   
+    --
     --   -- Better performance for large files
     --   vim.g.everforest_better_performance = 1
-    --   
+    --
     --   -- Sign column background (default matches background)
     --   vim.g.everforest_sign_column_background = 'none'
-    --   
+    --
     --   -- Spell check highlighting
     --   vim.g.everforest_spell_foreground = 'none'
-    --   
+    --
     --   -- UI related (sidebar, float)
     --   vim.g.everforest_ui_contrast = 'low' -- Options: 'low', 'high'
-    --   
+    --
     --   -- Dim inactive windows
     --   vim.g.everforest_dim_inactive_windows = 0
-    --   
+    --
     --   -- Show visual bell
     --   vim.g.everforest_show_eob = 1
-    --   
+    --
     --   -- Cursor line/column
     --   vim.g.everforest_cursor = 'auto'
-    --   
+    --
     --   -- Lightline/Airline theme
     --   vim.g.everforest_lightline_disable_bold = 0
-    --   
+    --
     --   -- Set background to light for light variant
     --   vim.o.background = 'light'  -- Use 'dark' for dark variant
-    --   
+    --
     --   vim.cmd.colorscheme 'everforest'
     -- end,
   },
@@ -552,54 +492,54 @@ return {
     -- config = function()
     --   -- Style options: 'default', 'aura', 'neon' (dark variants only)
     --   vim.g.edge_style = 'default'
-    --   
+    --
     --   -- Dim inactive windows
     --   vim.g.edge_dim_inactive_windows = 0
-    --   
+    --
     --   -- Disable italic
     --   vim.g.edge_disable_italic_comment = 0
-    --   
+    --
     --   -- Enable italic
     --   vim.g.edge_enable_italic = 1
-    --   
+    --
     --   -- Cursor line
     --   vim.g.edge_cursor = 'auto'
-    --   
+    --
     --   -- Menu selection
     --   vim.g.edge_menu_selection_background = 'blue' -- Options: 'blue', 'green', 'purple'
-    --   
+    --
     --   -- Transparent background (0: disabled, 1: enabled, 2: all)
     --   vim.g.edge_transparent_background = 0
-    --   
+    --
     --   -- Show end-of-buffer tildes
     --   vim.g.edge_show_eob = 1
-    --   
+    --
     --   -- Better performance
     --   vim.g.edge_better_performance = 1
-    --   
+    --
     --   -- Diagnostic display
     --   vim.g.edge_diagnostic_text_highlight = 0
     --   vim.g.edge_diagnostic_line_highlight = 0
     --   vim.g.edge_diagnostic_virtual_text = 'grey'
-    --   
+    --
     --   -- Current word highlighting
     --   vim.g.edge_current_word = 'grey background'
-    --   
+    --
     --   -- Disable terminal colors
     --   vim.g.edge_disable_terminal_colors = 0
-    --   
+    --
     --   -- Lightline/Airline theme
     --   vim.g.edge_lightline_disable_bold = 0
-    --   
+    --
     --   -- Sign column background
     --   vim.g.edge_sign_column_background = 'none'
-    --   
+    --
     --   -- Spell foreground
     --   vim.g.edge_spell_foreground = 'none'
-    --   
+    --
     --   -- Set background to light for light variant
     --   vim.o.background = 'light'  -- Use 'dark' for dark variant
-    --   
+    --
     --   vim.cmd.colorscheme 'edge'
     -- end,
   },
@@ -626,11 +566,11 @@ return {
       hide_inactive_statusline = false,
       dim_inactive = false,
       lualine_bold = false,
-      
+
       --- You can override specific color groups to use other groups or a hex color
       --- function will be called with a ColorScheme table
       on_colors = function(colors) end,
-      
+
       --- You can override specific highlights to use other groups or a hex color
       --- function will be called with a Highlights and ColorScheme table
       on_highlights = function(highlights, colors) end,
